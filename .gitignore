@@ -1,0 +1,18 @@
+# Datasets y archivos crudos
+data/
+CAVE_Raw/
+
+# Imágenes generadas
+training_images/
+*.png
+*.bmp
+*.jpg
+
+# Pesos de los modelos
+weights/
+*.pth
+*.pt
+
+# Archivos del sistema y caché
+Thumbs.db
+__pycache__/
