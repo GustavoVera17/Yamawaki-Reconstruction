@@ -1,18 +1,22 @@
-# Datasets y archivos crudos
-data/
-CAVE_Raw/
-
-# Imágenes generadas
-training_images/
-*.png
-*.bmp
-*.jpg
-
-# Pesos de los modelos
-weights/
-*.pth
-*.pt
-
-# Archivos del sistema y caché
-Thumbs.db
+# Ignorar entornos virtuales
+.venv/
 __pycache__/
+
+# Ignorar datasets e imágenes crudas
+dataset/
+CAVE_Raw/
+Harvard_Raw/
+*.png
+*.jpg
+*.jpeg
+
+# Ignorar pesos de modelos (pesan mucho)
+checkpoints/
+*.pth
+
+# Ignorar archivos comprimidos y de datos pesados
+*.zip
+*.mat
+
+# Ignorar la carpeta de dashboards generados
+dashboards/
