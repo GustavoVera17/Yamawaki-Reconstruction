@@ -1,22 +1,19 @@
-# Ignorar entornos virtuales
-.venv/
-__pycache__/
+# Ignorar entornos virtuales y caché
+**/.venv/
+**/__pycache__/
 
-# Ignorar datasets e imágenes crudas
-dataset/
-CAVE_Raw/
-Harvard_Raw/
-*.png
-*.jpg
-*.jpeg
+# Ignorar datasets pesados
+**/dataset/
+**/CAVE_Raw/
+**/Harvard_Raw/
+**/*.png
+**/*.jpg
 
-# Ignorar pesos de modelos (pesan mucho)
-checkpoints/
-*.pth
+# Ignorar pesos de modelos, zips y datos de matlab
+**/checkpoints/
+**/*.pth
+**/*.zip
+**/*.mat
 
-# Ignorar archivos comprimidos y de datos pesados
-*.zip
-*.mat
-
-# Ignorar la carpeta de dashboards generados
-dashboards/
+# Ignorar imágenes del dashboard
+**/dashboards/
