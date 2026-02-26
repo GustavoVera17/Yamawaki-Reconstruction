@@ -29,18 +29,20 @@ class SpatialContextAttentionBlock(nn.Module):
         # Usamos operaciones muy baratas para extraer contexto espacial a diferentes escalas
         self.conv_3x3 = nn.Conv2d(channels, channels, kernel_size=3, padding=1, groups=channels)
         self.conv_5x5 = nn.Conv2d(channels, channels, kernel_size=5, padding=2, groups=channels)
+        self.conv_7x7 = nn.Conv2d(channels, channels, kernel_size=7, padding=3, groups=channels)
         
         # Reducción para crear el "mapa de atención"
-        self.attention_conv = nn.Conv2d(channels * 2, 1, kernel_size=1)
+        self.attention_conv = nn.Conv2d(channels * 3, 1, kernel_size=1)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
         # Extraemos contexto a escala pequeña (3x3) y mediana (5x5)
         scale_1 = self.conv_3x3(x)
         scale_2 = self.conv_5x5(x)
+        scale_3 = self.conv_7x7(x)
         
         # Unimos y calculamos qué píxeles son más importantes (Atención)
-        concat = torch.cat([scale_1, scale_2], dim=1)
+        concat = torch.cat([scale_1, scale_2, scale_3], dim=1)
         attention_map = self.sigmoid(self.attention_conv(concat))
         
         # Multiplicamos la entrada original por el mapa de atención para resaltar los bordes
