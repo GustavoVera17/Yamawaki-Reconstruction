@@ -75,9 +75,16 @@ if __name__ == "__main__":
     modelo_dfhm = DFHM(channels=64, S=2)
     salida = modelo_dfhm(dummy_input)
     
+    # 1. Calculamos la cantidad total de parámetros
     params_dfhm = sum(p.numel() for p in modelo_dfhm.parameters() if p.requires_grad)
+    
+    # 2. Calculamos el peso en Memoria (MB)
+    # Cada parámetro float32 ocupa 4 bytes
+    peso_bytes = params_dfhm * 4
+    peso_mb = peso_bytes / (1024 ** 2)
     
     print(f"--- PRUEBA DEL DFHM COMPLETO ---")
     print(f"Dimensión de entrada : {dummy_input.shape}")
     print(f"Dimensión de salida  : {salida.shape}")
-    print(f"Total de parámetros del DFHM completo: {params_dfhm}")
+    print(f"Total de parámetros  : {params_dfhm}")
+    print(f"Peso del modelo (MB) : {peso_mb:.4f} MB")
