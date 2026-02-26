@@ -17,3 +17,11 @@
 
 # Ignorar imágenes del dashboard
 **/dashboards/
+
+# 1. Le decimos a Git que no ignore esta carpeta
+!Resultados/
+
+# 2. Le decimos a Git que recupere los PNG y ZIP que están adentro
+!Resultados/**/*.png
+!Resultados/**/*.zip
+!Resultados/**/*.pth

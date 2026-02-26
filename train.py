@@ -54,6 +54,13 @@ def train():
 
     print("\n¡Iniciando el entrenamiento!")
     
+    # =========================================================================
+    # EL CAMBIO: Seleccionamos la imagen fija de prueba ANTES de que inicie el ciclo
+    # =========================================================================
+    idx_azar = random.randint(0, len(dataset_test.image_folders) - 1)
+    nombre_imagen = os.path.basename(dataset_test.image_folders[idx_azar])
+    print(f"[*] Imagen fija seleccionada para el Dashboard: {nombre_imagen}\n")
+    
     for epoch in range(EPOCHS):
         modelo.train()
         loss_epoch = 0.0
@@ -80,10 +87,10 @@ def train():
         avg_loss = float(loss_epoch / len(loader_train))
         hist_loss.append(avg_loss)
 
-        # -- VALIDACIÓN FULL IMAGEN (512x512) --
+        # -- VALIDACIÓN FULL IMAGEN (512x512) FIJA --
         modelo.eval()
         with torch.no_grad(): 
-            idx_azar = random.randint(0, len(dataset_test.image_folders) - 1)
+            # Ya no generamos un número al azar aquí, usamos el 'idx_azar' de arriba
             test_in_2d, test_gt_3d = dataset_test.get_full_image(idx_azar)
             test_in_2d, test_gt_3d = test_in_2d.to(device), test_gt_3d.to(device)
             
@@ -113,12 +120,12 @@ def train():
 
             ax2 = fig.add_subplot(2, 4, 2)
             ax2.set_title(f"Verdad Limpia (Banda {banda_idx})")
-            ax2.imshow(img_gt, cmap='gray', vmin=0, vmax=1) # <-- AQUÍ ESTÁ LA MAGIA
+            ax2.imshow(img_gt, cmap='gray', vmin=0, vmax=1) 
             ax2.axis('off')
 
             ax3 = fig.add_subplot(2, 4, 3)
             ax3.set_title(f"Predicción (Banda {banda_idx})")
-            ax3.imshow(img_pred, cmap='gray', vmin=0, vmax=1) # <-- Y AQUÍ
+            ax3.imshow(img_pred, cmap='gray', vmin=0, vmax=1) 
             ax3.axis('off')
 
             ax4 = fig.add_subplot(2, 4, 4)
@@ -146,6 +153,9 @@ def train():
             ax8.set_title("SAM (Más bajo = Mejor)")
             ax8.plot(hist_sam, color='purple')
             ax8.grid(True)
+
+            # Actualizamos el título de la ventana con la imagen que se está evaluando
+            fig.suptitle(f"Evaluando: {nombre_imagen} | Época: {epoch+1}", fontsize=12)
 
             plt.tight_layout()
             plt.pause(0.01) # Refresco único
