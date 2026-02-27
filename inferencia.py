@@ -97,7 +97,8 @@ def main():
 
     error_inicial = np.abs(cubo_gt[banda_inicial] - cubo_pred[banda_inicial])
     axes[3].set_title("Mapa de Error Absoluto")
-    img_error_plot = axes[3].imshow(error_inicial, cmap='inferno', vmin=0, vmax=0.2) # vmax bajo para resaltar errores
+    img_error_plot = axes[3].imshow(error_inicial, cmap='rainbow', vmin=0, vmax=1)
+    # Puedes usar vmax bajo para resaltar errores
     fig.colorbar(img_error_plot, ax=axes[3], fraction=0.046, pad=0.04)
     axes[3].axis('off')
 
