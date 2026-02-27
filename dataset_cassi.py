@@ -48,7 +48,7 @@ class CASSIDataset(Dataset):
             img = Image.open(file)
             img_array = np.array(img, dtype=np.float32)
             
-            # --- NUEVO: Seguro contra "RGB falso" ---
+            # --- Seguro contra "RGB falso" ---
             # Si la imagen tiene 3 dimensiones (H, W, 3), tomamos solo el primer canal (H, W)
             if img_array.ndim == 3:
                 img_array = img_array[:, :, 0]

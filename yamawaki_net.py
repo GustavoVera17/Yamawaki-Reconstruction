@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-# 1. El bloque que ya probaste y funciona (SHB)
+# 1. El bloque (SHB) prueba de concepto
 class SpectralHallucinationBlock(nn.Module):
     def __init__(self, in_channels, S=2):
         super(SpectralHallucinationBlock, self).__init__()
@@ -22,11 +22,11 @@ class SpectralHallucinationBlock(nn.Module):
         out = torch.cat([intrinsic_features, ghost_features], dim=1)
         return out
 
-# 2. El nuevo bloque de Atención Espacial (SCAB)
+# 2. El bloque de Atención Espacial (SCAB)
 class SpatialContextAttentionBlock(nn.Module):
     def __init__(self, channels):
         super(SpatialContextAttentionBlock, self).__init__()
-        # Usamos operaciones muy baratas para extraer contexto espacial a diferentes escalas
+        # Se usan operaciones muy baratas para extraer contexto espacial a diferentes escalas
         self.conv_3x3 = nn.Conv2d(channels, channels, kernel_size=3, padding=1, groups=channels)
         self.conv_5x5 = nn.Conv2d(channels, channels, kernel_size=5, padding=2, groups=channels)
         self.conv_7x7 = nn.Conv2d(channels, channels, kernel_size=7, padding=3, groups=channels)
@@ -89,7 +89,7 @@ class YamawakiNet(nn.Module):
         self.head = nn.Conv2d(in_channels, num_features, kernel_size=3, padding=1)
         
         # 2. Cuerpo: Apilamos los 9 módulos DFHM usando nn.Sequential
-        # Esto crea una "tubería" donde la salida de un bloque es la entrada del siguiente
+        # Esto crea una cadena de bloques que se ejecutan uno tras otro, manteniendo el código limpio y modular.
         blocks = [DFHM(num_features, S) for _ in range(num_blocks)]
         self.body = nn.Sequential(*blocks)
         

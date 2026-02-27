@@ -41,11 +41,11 @@ def main():
     ruta_padre = os.path.dirname(RUTA_CARPETA_IMAGEN)
     nombre_imagen_objetivo = os.path.basename(RUTA_CARPETA_IMAGEN)
 
-    # 1. Cargar Dataset (Leemos la carpeta padre para aprovechar tu lógica de precarga y la máscara)
+    # 1. Cargar Dataset (Leemos la carpeta padre para aprovechar la lógica de precarga y la máscara)
     print(f"Cargando el entorno de validación desde: {ruta_padre}...")
     dataset_test = CASSIDataset(root_dir=ruta_padre, patch_size=48, num_patches_per_img=1, is_train=False)
 
-    # Buscamos el índice exacto de la imagen que elegiste
+    # Buscamos el índice exacto de la imagen que queremos evaluar dentro del dataset precargado
     idx_elegido = None
     for i, folder in enumerate(dataset_test.image_folders):
         if os.path.basename(folder) == nombre_imagen_objetivo:

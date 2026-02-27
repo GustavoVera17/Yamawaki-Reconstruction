@@ -7,7 +7,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 from skimage.metrics import structural_similarity as ssim_metric
-from tqdm import tqdm  # <--- Importamos la librería para la barra de progreso
+from tqdm import tqdm
 
 from dataset_cassi import CASSIDataset
 from yamawaki_net import YamawakiNet
@@ -55,7 +55,7 @@ def train():
     print("\n¡Iniciando el entrenamiento!")
     
     # =========================================================================
-    # EL CAMBIO: Seleccionamos la imagen fija de prueba ANTES de que inicie el ciclo
+    # Seleccionamos la imagen fija de prueba ANTES de que inicie el ciclo
     # =========================================================================
     idx_azar = random.randint(0, len(dataset_test.image_folders) - 1)
     nombre_imagen = os.path.basename(dataset_test.image_folders[idx_azar])
@@ -65,7 +65,7 @@ def train():
         modelo.train()
         loss_epoch = 0.0
         
-        # --- NUEVA BARRA DE PROGRESO TQDM ---
+        # --- BARRA DE PROGRESO TQDM ---
         # Envolvemos el loader_train en tqdm para generar la barra visual
         loop_entrenamiento = tqdm(loader_train, desc=f"Época [{epoch+1}/{EPOCHS}]", leave=True)
         
@@ -81,7 +81,7 @@ def train():
             
             loss_epoch += loss.item()
 
-            # Actualizamos el texto al final de la barra con el Loss actual
+            # Actualiza el texto al final de la barra con el Loss actual
             loop_entrenamiento.set_postfix(loss=f"{loss.item():.4f}")
 
         avg_loss = float(loss_epoch / len(loader_train))
@@ -90,7 +90,7 @@ def train():
         # -- VALIDACIÓN FULL IMAGEN (512x512) FIJA --
         modelo.eval()
         with torch.no_grad(): 
-            # Ya no generamos un número al azar aquí, usamos el 'idx_azar' de arriba
+            
             test_in_2d, test_gt_3d = dataset_test.get_full_image(idx_azar)
             test_in_2d, test_gt_3d = test_in_2d.to(device), test_gt_3d.to(device)
             

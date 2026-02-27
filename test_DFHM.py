@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-# 1. El bloque que ya probaste y funciona (SHB)
+# 1. El bloque (SHB) prueba de concepto
 class SpectralHallucinationBlock(nn.Module):
     def __init__(self, in_channels, S=2):
         super(SpectralHallucinationBlock, self).__init__()
@@ -36,7 +36,7 @@ class SpatialContextAttentionBlock(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        # Extraemos contexto a escala pequeña (3x3) y mediana (5x5)
+        # Extraemos contexto a escala pequeña (3x3), mediana (5x5) y grande (7x7)
         scale_1 = self.conv_3x3(x)
         scale_2 = self.conv_5x5(x)
         scale_3 = self.conv_7x7(x)

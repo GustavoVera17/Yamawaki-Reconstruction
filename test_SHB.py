@@ -9,7 +9,7 @@ class SpectralHallucinationBlock(nn.Module):
         self.compressed_channels = in_channels // S
         self.hallucinated_channels = in_channels - self.compressed_channels
         
-        # 1. Fase de Compresión: Usamos una convolución 1x1 normal (para extraer la esencia)
+        # 1. Fase de Compresión: Usamos una convolución 1x1 normal (para extraer características intrínsecas)
         self.compress_conv = nn.Conv2d(in_channels, self.compressed_channels, kernel_size=1)
         
         # 2. Fase de Alucinación: Operación "barata" (Depth-wise convolution)
@@ -41,21 +41,21 @@ if __name__ == "__main__":
     dummy_input = torch.randn(1, 64, 48, 48) 
     print(f"Dimensión de entrada: {dummy_input.shape}")
 
-    # 2. Instanciamos el modelo con el factor de compresión S=2 del paper
+    # 2. Instanciamos el modelo con el factor de compresión S=2
     modelo_shb = SpectralHallucinationBlock(in_channels=64, S=2)
 
     # 3. Pasamos el tensor de ruido por el modelo
     salida = modelo_shb(dummy_input)
     print(f"Dimensión de salida : {salida.shape}")
 
-    # 4. Comprobamos si las dimensiones coinciden (Si es True, ¡la arquitectura base funciona!)
+    # 4. Comprobamos si las dimensiones coinciden (Si es True, la arquitectura base funciona)
     print(f"¿La entrada y salida tienen el mismo tamaño?: {dummy_input.shape == salida.shape}")
 
-    # 5. Contamos los parámetros para ver por qué es tan "ligero"
+    # 5. Contamos los parámetros para ver el peso del bloque
     params_totales = sum(p.numel() for p in modelo_shb.parameters() if p.requires_grad)
     print(f"Total de parámetros entrenables en este bloque: {params_totales}")
     
-    # Solo para comparar, ¿cuánto pesaría una convolución estándar normal de 64 a 64 canales?
+    # Solo para comparar, con esto se ve cuánto pesaría una convolución estándar normal de 64 a 64 canales
     conv_normal = nn.Conv2d(64, 64, kernel_size=3, padding=1)
     params_normal = sum(p.numel() for p in conv_normal.parameters() if p.requires_grad)
     print(f"Parámetros si usaramos una convolución normal : {params_normal}")

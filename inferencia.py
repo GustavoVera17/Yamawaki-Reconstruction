@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
-# Importamos tus módulos
+# Importamos los módulos
 from dataset_cassi import CASSIDataset
 from yamawaki_net import YamawakiNet
 from metricas import calcular_psnr, calcular_sam
@@ -113,7 +113,7 @@ def main():
         valstep=1
     )
 
-    # 7. Función de actualización cuando mueves el slider
+    # 7. Función de actualización del slider
     def update(val):
         b = int(slider_banda.val)
         wl = longitudes_onda[b]
