@@ -25,10 +25,10 @@ def main():
     # =========================================================================
     
     # 1. Ruta exacta del modelo .pth que quieres usar (¡Debe ser uno entrenado con la red de 512 canales!)
-    RUTA_MODELO_PTH = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\checkpoints\yamawaki_real_epoch_100.pth"
+    RUTA_MODELO_PTH = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\checkpoints\yamawaki_fiel_best.pth"
     
     # 2. Ruta exacta de la carpeta de la imagen que quieres evaluar
-    RUTA_CARPETA_IMAGEN = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\dataset\fortest\oil_painting_ms"
+    RUTA_CARPETA_IMAGEN = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\dataset\fortest\watercolors_ms"
 
     # =========================================================================
 

@@ -25,7 +25,7 @@ def main():
     # =========================================================================
     
     # Ruta exacta del modelo .pth de 512 canales
-    RUTA_MODELO_PTH = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\checkpoints\yamawaki_real_epoch_100.pth"
+    RUTA_MODELO_PTH = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\checkpoints\yamawaki_fiel_best.pth"
     
     # Ruta exacta de la carpeta de la imagen
     RUTA_CARPETA_IMAGEN = r"C:\CODE2026\CASSIproy2026\CASSIproy2026\Yamawaki_Rep\dataset\fortest\fake_and_real_tomatoes_ms"
