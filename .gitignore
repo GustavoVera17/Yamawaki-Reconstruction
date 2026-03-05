@@ -25,3 +25,11 @@
 !Resultados/**/*.png
 !Resultados/**/*.zip
 !Resultados/**/*.pth
+
+# 1. Le decimos a Git que no ignore esta carpeta
+!old/
+
+# 2. Le decimos a Git que recupere los PNG y ZIP que están adentro
+!old/**/*.png
+!old/**/*.zip
+!old/**/*.pth
